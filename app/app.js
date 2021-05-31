@@ -10,8 +10,12 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json({limit: '2048kb'}));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json({
+    limit: '2048kb'
+}));
 
 app.use(express.static('public'));
 
@@ -25,14 +29,13 @@ mongoose.connect(config.databaseUrl, {
 }, (error) => {
     if (error) {
         console.error(error);
-    }
-    else {
+    } else {
         console.info('Connect with database established');
     }
 });
 
 process.on('SIGINT', () => {
-    mongoose.connection.close(function () {
+    mongoose.connection.close(function() {
         console.error('Mongoose default connection disconnected through app termination');
         process.exit(0);
     });
@@ -41,10 +44,10 @@ process.on('SIGINT', () => {
 
 routes(app);
 
-app.get('/*', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+app.get('/*', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(config.port, function () {
-  console.info(`Server is running at ${config.port}`)
-});
+app.listen(config.port, function() {
+    console.info(`Server is running at ${config.port}`)
+})
