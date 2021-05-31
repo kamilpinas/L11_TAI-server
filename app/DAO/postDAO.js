@@ -14,11 +14,11 @@ const postSchema = new mongoose.Schema({
         type: String
     },
 }, {
-    collection: 'dp_post'
+    collection: 'bib_post'
 });
 postSchema.plugin(uniqueValidator);
 
-const PostModel = mongoose.model('dp_post', postSchema);
+const PostModel = mongoose.model('bib_post', postSchema);
 
 async function query() {
     const result = await PostModel.find({}); {
